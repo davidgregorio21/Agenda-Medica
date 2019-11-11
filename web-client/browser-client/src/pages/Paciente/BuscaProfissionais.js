@@ -11,8 +11,13 @@ import NavBarPaciente from './NavBarPaciente.js';
 export default function BuscaProfissionais({ history }) {
 
   async function showProfissionais() {
-    const response = await api.get("/User/Profissionais");
-    const profissionais = response.data;
+    let profissionais = [];
+    try{
+      const response = await api.get("/User/Profissionais");
+      const profissionais = response.data;
+    } catch (err){
+      console.log(err);
+    }
 
     ReactDOM.render(
       <CardBuscaProfissionais profissionais={profissionais} />,

@@ -143,20 +143,28 @@ function TableConsultas({ consultas }) {
 }
 
 export default function Consultas(props) {
-    api.get('/Consulta/ConsultasPaciente')
-        .then(response => {
-            ReactDOM.render(
-                <TableConsultas consultas={response.data} />,
-                document.getElementById('table-consultas')
-            );
-    });
+    let listaConsultas = [];
+    try {
+        const response = api.get('/Consulta/ConsultasPaciente');
+        //     .then(response => {
+        //         ReactDOM.render(
+        //             <TableConsultas consultas={response.data} />,
+        //             document.getElementById('table-consultas')
+        //         );
+        // });
+        listaConsultas = response.data;
+    } catch(err)
+    {
+        console.log(err);
+    }
 
     return (
         <NavBarPaciente
             history={props.history}
             content={
                 <Container maxWidth="xl">
-                    <div id="table-consultas"></div>
+                    {/* <div id="table-consultas"></div> */}
+                    <TableConsultas consultas={listaConsultas} />
                 </Container>
             }
         />

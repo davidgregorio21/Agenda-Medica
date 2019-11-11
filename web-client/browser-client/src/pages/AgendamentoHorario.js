@@ -22,11 +22,14 @@ export default function AgendamentoHorario({ history }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    try {
     const response = await api.post('/User/Login',
       {
         email,
       });
-
+    } catch (err){
+        console.log(err);
+    }
     history.push('/Home');
   }
 
